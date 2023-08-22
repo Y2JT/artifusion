@@ -38,6 +38,8 @@ You can check out [the Next.js GitHub repository](https://github.com/vercel/next
    (Once installed with CLI user can directly import components and they will appear in project folder as .js or .tsx file)
    (The individual components contains tightly typed code === perfect for maintainance)
    (Gives ownership to component system)
+   (Implemented Route groups to prevent folders in app from being included in the route's URL path)
+   (Organize route segments without affecting URL path structure)
 
 The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
 
