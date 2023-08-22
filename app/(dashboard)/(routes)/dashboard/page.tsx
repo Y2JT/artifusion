@@ -5,7 +5,7 @@ const DashboardPage = () => {
     <div>
       <p>Dashboard Page (Protected)</p>
       <UserButton afterSignOutUrl="/"/>
-    </div>
+    </div> // after sign out reach landing page security feat
   )
 }
 
