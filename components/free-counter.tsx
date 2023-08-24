@@ -1,3 +1,7 @@
-export const FreeCounter = ({
-     apiLimitCount = 0 
-    }) => {}
+export const FreeCounter = () => {
+    return (
+        <div>
+            Free Counter Here
+        </div>
+    )
+}
