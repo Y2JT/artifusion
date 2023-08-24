@@ -8,7 +8,7 @@ const DashboardLayout = async ({
 }: {
     children: React.ReactNode;
 }) => {
-    const apiLimitCount = await getApiLimitCount();
+    const apiLimitCount = await getApiLimitCount(); // get api limit count will trigger free-counter.tsx to render
 
 
     return (

@@ -54,7 +54,7 @@ const ConversationPage = () => {
             // TODO: Open Pro modal for suscription services for premium features
             console.log(error);
         } finally {
-            router.refresh();
+            router.refresh(); // refresh the page and rehydrates all server-side props/components fetching the newest data
         }
     };
 

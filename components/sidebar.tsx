@@ -6,6 +6,7 @@ import Link from "next/link";
 import { cn } from "@/lib/utils";
 import { Code, ImageIcon, LayoutDashboard, MessageSquare, Music, Settings, VideoIcon } from "lucide-react";
 import { usePathname } from "next/navigation";
+import { FreeCounter } from "@/components/free-counter";
 
 
 const monsterrat = Montserrat({
@@ -94,7 +95,8 @@ const Sidebar = ({
                     ))}
                 </div>
             </div>
-            <FreeCounter apiLimitCount={apiLimitCount} />
+            <FreeCounter apiLimitCount={apiLimitCount} 
+            />
         </div>
     );
 };
