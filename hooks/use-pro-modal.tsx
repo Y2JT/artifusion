@@ -7,7 +7,7 @@ interface userProModalStore {   //interface for pro modal
 };
 
 export const useProModal = create<userProModalStore>((set) => ({    //create pro modal, giving us global state control for opening closing the modal from everywhere.
-    isOpen: false,
+    isOpen: true,
     onOpen: () => set({ isOpen: true }),
     onClose: () => set({ isOpen: false }),
 }));
