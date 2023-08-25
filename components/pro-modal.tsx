@@ -7,6 +7,8 @@ import { ArrowRight, Code, ImageIcon, MessageSquare, Music, VideoIcon, Check, Za
 import { Card } from "@/components/ui/card";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
+import axios from "axios";
+import { useState } from "react";
 
 
 const tools = [ //this is the same as the one in app/(dashboard)/(routes)/dashboard/page.tsx
@@ -32,7 +34,21 @@ const tools = [ //this is the same as the one in app/(dashboard)/(routes)/dashbo
 
 export const ProModal = () => {
     const ProModal = useProModal();
+    const [loading, setLoading] = useState(false);
 
+    const onSubscribe = async () => {
+        try {
+            setLoading(true);
+            const response = await axios.get("/api/stripe");
+
+            window.location.href = response.data.url;
+
+        } catch (error) {
+            console.log(error, "STRIPE CLIENT ERROR");
+        } finally {
+            setLoading(false);
+        }
+    }
 
     return(
         <Dialog open={ProModal.isOpen} onOpenChange={ProModal.onClose}>
@@ -67,6 +83,7 @@ export const ProModal = () => {
                 </DialogHeader>
                 <DialogFooter>
                     <Button
+                        onClick={onSubscribe}
                         size="lg"
                         variant="premium"
                         className="w-full"

@@ -1,9 +1,9 @@
 import { auth, currentUser } from "@clerk/nextjs";
-import Stripe from "stripe";
+import { NextResponse } from "next/server";
+
 import prismadb from "@/lib/prismadb";
 import { stripe } from "@/lib/stripe";
 import { absoluteUrl } from "@/lib/utils";
-import { NextResponse } from "next/server";
 
 const settingsUrl = absoluteUrl("/settings");
 
@@ -21,6 +21,7 @@ export async function GET() {
                 userId,
             },
         });
+
         if (userSubscription && userSubscription.stripeCustomerId) {
             const stripeSession = await stripe.billingPortal.sessions.create({
                 customer: userSubscription.stripeCustomerId,
@@ -44,12 +45,11 @@ export async function GET() {
                         product_data: {
                             name: "Artifusion Creator",
                             description: "Unlimited AI generation tokens",
-                         },
-                            unit_amount: 2000,
-                            recurring: {
-                                interval: "month",
-                            }
-                            
+                        },
+                        unit_amount: 2000,
+                        recurring: {
+                            interval: "month",
+                        },      
                     },
                     quantity: 1,
                 }
