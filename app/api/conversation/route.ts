@@ -4,6 +4,8 @@ import { Configuration, OpenAIApi } from "openai";
 
 import { increaseApiLimit, checkApiLimit } from "@/lib/api-limit";
 
+import { checkSubscription } from "@/lib/subscription";
+
 const configuration = new Configuration({
     apiKey: process.env.OPENAI_API_KEY,
 });
@@ -31,8 +33,9 @@ export async function POST(
         }
 
         const freeTrial = await checkApiLimit();
+        const isCreator = await checkSubscription();
 
-        if (!freeTrial) {
+        if (!freeTrial && !isCreator) {
             return new NextResponse("Free trial limit reached, please upgrade your account", { status: 403 }); // premium model after
         }
 
@@ -40,6 +43,10 @@ export async function POST(
             model: "gpt-3.5-turbo",
             messages
         });
+
+        if(!isCreator) {
+            await increaseApiLimit();
+        }
 
         await increaseApiLimit();
 

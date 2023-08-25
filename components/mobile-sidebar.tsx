@@ -10,11 +10,13 @@ import Sidebar from "./sidebar";
 
 interface MobileSidebarProps {
     apiLimitCount: number;
+    isCreator: boolean | undefined;
 };
 
-const MobileSidebar = (
-    { apiLimitCount = 0 }: MobileSidebarProps
-) => {   // MobileSidebar component
+const MobileSidebar = ({
+     apiLimitCount = 0, 
+     isCreator = false,
+    }: MobileSidebarProps) => {    // MobileSidebar component
     const [isMounted, setIsMounted] = useState(false); // isMounted state to deal with hydration errors
 
     useEffect(() => {
@@ -32,7 +34,7 @@ const MobileSidebar = (
                 </Button>
             </SheetTrigger>
             <SheetContent side="left" className="p-0">
-                <Sidebar apiLimitCount={apiLimitCount}/>
+                <Sidebar isCreator={isCreator} apiLimitCount={apiLimitCount}/>
             </SheetContent>
         </Sheet>
     );
