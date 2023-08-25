@@ -32,6 +32,7 @@ const ConversationPage = () => {
         resolver: zodResolver(formSchema), // validate with zod
         defaultValues: {
             prompt: ""
+            
         }
     });
 
