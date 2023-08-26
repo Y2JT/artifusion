@@ -55,7 +55,7 @@ export async function POST(
             await increaseApiLimit();
         }
 
-        await increaseApiLimit();
+        // await increaseApiLimit();
 
         return NextResponse.json(response.data.data);
 
