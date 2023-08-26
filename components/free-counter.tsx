@@ -9,10 +9,12 @@ import { Zap } from "lucide-react";
 import { useProModal } from "@/hooks/use-pro-modal";
 interface FreeCounterProps {
     apiLimitCount: number;
+    isCreator: boolean | undefined;
 };
 
 export const FreeCounter = ({
-    apiLimitCount = 0
+    apiLimitCount = 0,
+    isCreator = false,
 }: FreeCounterProps) => {
     const proModal = useProModal();
     const[mounted, setMounted] = useState(false);   // if hydration needed
@@ -22,6 +24,10 @@ export const FreeCounter = ({
     }, []);
 
     if (!mounted) {
+        return null;
+    }
+
+    if (isCreator) {
         return null;
     }
 

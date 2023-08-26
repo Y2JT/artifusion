@@ -3,6 +3,7 @@ import { NextResponse } from "next/server";
 import Replicate from "replicate";
 
 import { increaseApiLimit, checkApiLimit } from "@/lib/api-limit";
+import { checkSubscription } from "@/lib/subscription";
 
 
 const replicate = new Replicate({
@@ -26,8 +27,9 @@ export async function POST(
         }
 
         const freeTrial = await checkApiLimit();
+        const isCreator = await checkSubscription();
 
-        if (!freeTrial) {
+        if (!freeTrial && !isCreator) {
             return new NextResponse("Free trial limit reached, please upgrade your account", { status: 403 }); // premium model after
         }
 
@@ -38,9 +40,10 @@ export async function POST(
                 prompt_a: prompt
               }
             }
-          );
-
-        await increaseApiLimit();
+        );
+        if(!isCreator) {
+            await increaseApiLimit();
+        }
 
         return NextResponse.json(response);
     } catch (error) {
